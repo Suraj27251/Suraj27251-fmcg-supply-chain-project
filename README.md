@@ -21,8 +21,22 @@ This repository now includes a polished, browser-based dashboard designed for po
 ### Deploy on Render
 1. Push this repository to GitHub.
 2. In Render, create a **New Blueprint** from the repository. Render will read `render.yaml`.
-3. Deploy the static site. The root URL opens `dashboard/dashboard.html` automatically via `index.html`.
-4. No backend or build step is required; the dashboard loads the project CSV files directly from `data/`.
+3. Render runs the build command below. The `requirements.txt` file is included for this step, even though no third-party Python packages are required:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Render starts the dashboard with:
+   ```bash
+   python3 -m http.server $PORT
+   ```
+5. The root URL opens `dashboard/dashboard.html` automatically via `index.html`, and the dashboard loads the project CSV files directly from `data/`.
+
+### Manual Render Web Service settings
+If you are creating a **New Web Service** manually instead of using the Blueprint, use these values:
+
+- **Root Directory:** leave blank
+- **Build Command:** `pip install -r requirements.txt`
+- **Start Command:** `python3 -m http.server $PORT`
 
 ### Local preview
 ```bash
