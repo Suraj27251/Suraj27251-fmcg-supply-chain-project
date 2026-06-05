@@ -7,6 +7,45 @@
 
 ---
 
+## 🚀 Render-Ready Interactive Dashboard
+
+This repository now includes a polished, browser-based dashboard designed for portfolio showcasing and Render deployment.
+
+### What the dashboard includes
+- **Executive overview:** OTIF, on-time, in-full, delay, monthly trend, volume, and failure breakdown.
+- **Customer insights:** at-risk customer ranking, value-vs-performance matrix, searchable customer table, and target gaps.
+- **Product analysis:** SKU-level OTIF ranking, category comparison, delay diagnostics, and searchable product table.
+- **Root cause & Pareto:** late-only, partial-only, combined issue split, customer failure Pareto, and a 90-day roadmap.
+- **Target vs actual:** customer-specific target achievement, severity distribution, and exception list.
+
+### Deploy on Render
+1. Push this repository to GitHub.
+2. In Render, create a **New Blueprint** from the repository. Render will read `render.yaml`.
+3. Render runs the build command below. The `requirements.txt` file is included for this step, even though no third-party Python packages are required:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Render starts the dashboard with:
+   ```bash
+   python3 -m http.server $PORT
+   ```
+5. The root URL opens `dashboard/dashboard.html` automatically via `index.html`, and the dashboard loads the project CSV files directly from `data/`.
+
+### Manual Render Web Service settings
+If you are creating a **New Web Service** manually instead of using the Blueprint, use these values:
+
+- **Root Directory:** leave blank
+- **Build Command:** `pip install -r requirements.txt`
+- **Start Command:** `python3 -m http.server $PORT`
+
+### Local preview
+```bash
+python3 -m http.server 8000
+```
+Then open `http://localhost:8000/dashboard/dashboard.html`.
+
+---
+
 ## 📋 PROJECT OVERVIEW
 
 This is a **comprehensive supply chain analytics project** analyzing FMCG (Fast-Moving Consumer Goods) order fulfillment performance. The project identifies inefficiencies, calculates critical KPIs (especially OTIF), and provides actionable recommendations to improve supply chain performance against customer targets.
